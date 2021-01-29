@@ -1,0 +1,11 @@
+.Counter {
+    width: 400px;
+    padding: 10px;
+    bottom: 1px solid #181515;
+    text-align-last: center;
+}
+.CounterValue {
+    margin-right: 15px;
+    margin-left: 15px;
+    font-size: 64px;
+}

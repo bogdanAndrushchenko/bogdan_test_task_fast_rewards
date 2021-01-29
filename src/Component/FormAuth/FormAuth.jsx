@@ -1,47 +1,59 @@
-import {useState} from "react";
+import {useState, } from "react";
+import fire_db from "../../fire_db";
 import s from './FormAuth.module.css';
 
-const FormAuth = () => {
-
+const FormAuth = ({setUser}) => {
     const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('')
-
-    const handleChange = ({target: {value, id}}) => {
-        switch (id) {
-            case("login"):
+    const [password, setPassword] = useState('');
+    const handleInput = ({target: {name, value}}) => {
+        switch (name) {
+            case ("login"):
                 setLogin(value);
-            case('password'):
+                break
+            case ("password"):
                 setPassword(value)
+
         }
     }
 
-    const createUser = () => {
-        console.log('User created')
+    const handleCreate = async event => {
+        event.preventDefault();
+        try {
+            await fire_db
+                .auth()
+                .createUserWithEmailAndPassword(login, password);
+        } catch (error) {
+            console.log(error);
+        }
+        resetForm();
+    };
+
+    const resetForm = () => {
+        setLogin("");
+        setPassword("")
     }
 
     return (
-        <form className={s.login_block}>
-            <input
-                type="text"
-                id="login"
-                placeholder="Login"
-                autoComplete="off"
-                onChange={handleChange}
-            />
-            <input
-                type="password"
-                id="password"
-                placeholder="Password"
-                autoComplete="off"
-                onChange={handleChange}
-            />
-            <button
-                type="submit"
-                onClick={createUser}>
-                Login
-            </button>
-        </form>
-    )
+        <div className={s.login_block}>
+            <h1>Sign up</h1>
+            <form onSubmit={handleCreate} autoComplete="off">
+                <input name="login"
+                       type="login"
+                       placeholder="Login"
+                       className={s.input}
+                       onChange={handleInput}
+                />
+
+                <input name="password"
+                       type="password"
+                       placeholder="password"
+                       className={s.input}
+                       onChange={handleInput}/>
+
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    );
 }
 
 export default FormAuth;

@@ -1,0 +1,8 @@
+.Form {
+    width: 320px ;
+}
+.Label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}

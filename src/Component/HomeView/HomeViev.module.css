@@ -1,0 +1,22 @@
+.h1{
+    text-align: center;
+}
+.nav{
+    display: flex;
+    justify-content: center;
+}
+.link {
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px;
+    font-weight: 500;
+    color: #377037;
+    font-size: 18px;
+}
+
+.activeLink {
+    composes: link;
+    color: #f32152;
+    text-decoration: none;
+}
